@@ -1,6 +1,7 @@
 import MateRecommendation from "components/MateRecommendation";
 import PlaceRecommendation from "components/PlaceRecommendation";
 import ShareButton from "components/ShareButton";
+import { useEffect } from "react";
 
 const ResultPage = () => {
   return (
@@ -18,8 +19,7 @@ const ResultPage = () => {
       <MateRecommendation major="전기전자컴퓨터공학부" sid={20} name="김여원" />
 
       <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
-        <ShareButton />
-        <ShareButton />
+        <ShareButton type="kakao" />
         <ShareButton />
       </div>
     </div>
