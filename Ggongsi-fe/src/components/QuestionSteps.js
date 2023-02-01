@@ -1,16 +1,16 @@
 import { colorSet } from "utils/style";
 
-const QuestionSteps = () => {
+const QuestionSteps = ({ stepsFilled }) => {
   return (
     <button
       style={{
         width: "13px",
         height: "15px",
-        margin: '30px 10px 30px 10px',
+        margin: "30px 10px 30px 10px",
         border: "solid 2px white ",
         borderRadius: "50%",
-        background: "none",
-        //props 
+        background: stepsFilled ? colorSet.white : "none",
+        //props
       }}
     >
       <img />
