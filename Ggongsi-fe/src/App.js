@@ -1,5 +1,6 @@
 import Layout from "components/Layout";
-import ResultPage from "pages/ResultPage";
+import QuestionPage from "pages/QuestionPage";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -7,7 +8,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<ResultPage />} />
+          <Route path="/" element={<QuestionPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

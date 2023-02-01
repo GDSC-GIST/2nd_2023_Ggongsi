@@ -21,3 +21,8 @@ code {
   background: #3d6387;
   word-break: keep-all;
 }
+
+@font-face{
+  font-family: "BMHANNA";
+  src: url('./fonts/BMHANNAPro.ttf');
+}
