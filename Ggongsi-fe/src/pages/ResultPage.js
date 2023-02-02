@@ -1,7 +1,6 @@
 import MateRecommendation from "components/MateRecommendation";
 import PlaceRecommendation from "components/PlaceRecommendation";
 import ShareButton from "components/ShareButton";
-import { useEffect } from "react";
 
 const ResultPage = () => {
   return (
