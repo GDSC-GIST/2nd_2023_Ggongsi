@@ -21,9 +21,9 @@ const QuestionsAnswers = ({ question }) => {
     }
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(answerNo);
-  }, [answerNo]);
+  }, [answerNo]); */
   return (
     <>
       <p

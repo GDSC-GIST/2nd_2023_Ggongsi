@@ -15,7 +15,7 @@ const QuestionPage = () => {
         textAlign: "center",
       }}
     >
-      <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
+      <div style={{ display: "flex", gap: "8px", marginTop: "50px" }}>
         {[0, 1, 2, 3, 4, 5, 6].map((no, index) => (
           <QuestionSteps
             stepsFilled={index <= questionNo}
