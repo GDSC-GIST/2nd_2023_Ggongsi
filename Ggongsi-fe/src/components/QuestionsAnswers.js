@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { useAtom } from "jotai";
 import { answerNoAtom, questionNoAtom } from "utils/atom";
 import { useEffect } from "react";
-//import axios from "axios";
+import axios from "axios";
 const QuestionsAnswers = ({ question }) => {
   const Questions = getQuestions(question);
   const [answerNo, setAnswerNo] = useAtom(answerNoAtom);
@@ -23,9 +23,11 @@ const QuestionsAnswers = ({ question }) => {
   const sendAnswer = () => {
     axios({
       method: "post",
-      url: "/user/${studentID}", //studentID
+      //url: `/user/${studentID}`, //studentID
+      url: "/user/studentID",
+      //만약에 url에 변수를 넣고 싶다면 `(backtick,억음부호)를 넣어주고, ${변수}로 표시해야 적용됨
       transformRequest: [
-        function (data, headers) {
+        (data) => {
           const ans1 = answerNo[0];
           const ans2 = answerNo[1];
           const ans3 = answerNo[2];
@@ -33,30 +35,31 @@ const QuestionsAnswers = ({ question }) => {
           const ans5 = answerNo[4];
           const ans6 = answerNo[5];
           const ans7 = answerNo[6];
+          data = {
+            name: "",
+            studentID: "",
+            major: "",
+            answer1: ans1,
+            answer2: ans2,
+            answer3: ans3,
+            answer4: ans4,
+            answer5: ans5,
+            answer6: ans6,
+            answer7: ans7,
+          };
           return data;
         },
       ],
       //headers: { "X-Requested-With": "XMLHttpRequest" },
       //여기에서 header가 필요한가?
-      data: {
-        name: "",
-        studentID: "",
-        major: "",
-        answer1: ans1,
-        answer2: ans2,
-        answer3: ans3,
-        answer4: ans4,
-        answer5: ans5,
-        answer6: ans6,
-        answer7: ans7,
-      },
+
       timeout: 2000, //해당 시간보다 지연될 경우 요청 종료
     });
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log(answerNo);
-  }, [answerNo]); */
+  }, [answerNo]);
   return (
     <>
       <p
@@ -90,6 +93,7 @@ const QuestionsAnswers = ({ question }) => {
           onClick={() => {
             savingAnswer(index);
             if (answerNo.length == 7) {
+              console.log("sendAnswer 작동");
               sendAnswer();
             }
           }}
