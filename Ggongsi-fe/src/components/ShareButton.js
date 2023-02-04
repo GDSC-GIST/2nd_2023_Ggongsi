@@ -1,15 +1,9 @@
-import { colorSet } from "utils/style";
-import KakaoImage from "assets/kakaotalk_sharing_btn_small.png";
+import KakaoImage from "assets/kakaotalk_share.png";
+import ShareImage from "assets/share.png";
 
 const ShareButton = ({ type = "" }) => {
   const onClick = () => {
     switch (type) {
-      case "instagram":
-        /* window.location.assign(
-          "Intent://instagram.com/#intent;scheme=https;package=com.instagram.share.ADD_TO_STORY;end"
-        ); */
-        break;
-
       case "kakao":
         if (!window.Kakao.isInitialized()) {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
@@ -38,13 +32,20 @@ const ShareButton = ({ type = "" }) => {
         height: "40px",
         border: "none",
         borderRadius: "20px",
-        background: type === colorSet.white,
+        background: type ? "#FEE500" : "none",
       }}
     >
-      <img
-        src={KakaoImage}
-        style={{ width: "40px", height: "40px", borderRadius: "20px" }}
-      />
+      {type ? (
+        <img
+          src={KakaoImage}
+          style={{ width: "34px", height: "34px", borderRadius: "17px" }}
+        />
+      ) : (
+        <img
+          src={ShareImage}
+          style={{ width: "40px", height: "40px", borderRadius: "20px" }}
+        />
+      )}
     </button>
   );
 };

@@ -11,8 +11,8 @@ const PlaceRecommendation = ({ place }) => {
           margin: "0px 0px 30px 0px",
           lineHeight: "20px",
           color: colorSet.white,
+          fontFamily: "Hanna",
           fontSize: "20px",
-          fontWeight: "bold",
         }}
       >
         나에게 맞는 공부 장소는
@@ -21,9 +21,9 @@ const PlaceRecommendation = ({ place }) => {
         style={{
           margin: "0px",
           lineHeight: "20px",
-          color: colorSet.white,
-          fontSize: "20px",
-          fontWeight: "bold",
+          color: colorSet.pink,
+          fontFamily: "Hanna",
+          fontSize: "30px",
           wordBreak: "keep-all",
         }}
       >
@@ -37,6 +37,7 @@ const PlaceRecommendation = ({ place }) => {
           maxWidth: "300px",
           margin: "0px 0px 100px 0px",
           color: colorSet.white,
+          fontFamily: "Hanna",
           fontSize: "16px",
           fontWeight: "normal",
         }}
