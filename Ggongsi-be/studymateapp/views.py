@@ -129,6 +129,8 @@ def findMate(request, studentID):
     if request.method == 'GET':
         candidates = UserAnswers.objects.exclude(studentID=studentID)
         me = UserAnswers.objects.get(studentID=studentID)
+        pl = me.place
+        candidates = candidates.filter(place__exact=pl)
         top = 0
         mates = []
         for candidate in candidates:
@@ -156,7 +158,7 @@ def findMate(request, studentID):
                 mates.remove(mate)
 
         #mate = mates[0]
-        l = len(mate)
+        l = len(mates)
         rn = random.randint(0, l)
         mate = mates[rn]
         stuID = int(mate[0])
