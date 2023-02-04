@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { useAtom } from "jotai";
 import { answerNoAtom, questionNoAtom } from "utils/atom";
 import { useEffect } from "react";
-
+//import axios from "axios";
 const QuestionsAnswers = ({ question }) => {
   const Questions = getQuestions(question);
   const [answerNo, setAnswerNo] = useAtom(answerNoAtom);
@@ -80,3 +80,5 @@ const QuestionsAnswers = ({ question }) => {
 };
 
 export default QuestionsAnswers;
+//store answer - POST
+//URL / user/{studentID}
