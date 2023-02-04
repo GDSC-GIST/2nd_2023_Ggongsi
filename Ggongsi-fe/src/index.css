@@ -7,6 +7,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #3d6387;
+  color: #fff;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
 }
 
 code {
@@ -22,7 +29,16 @@ code {
   word-break: keep-all;
 }
 
-@font-face{
+@font-face {
+  font-family: "Hanna";
+  src: url("./fonts/BMHANNA.ttf");
+}
+@font-face {
+  font-family: "HannaAir";
+  src: url("./fonts/BMHANNAAir.ttf");
+}
+
+@font-face {
   font-family: "BMHANNA";
-  src: url('./fonts/BMHANNAPro.ttf');
+  src: url("./fonts/BMHANNAPro.ttf");
 }
