@@ -2,6 +2,8 @@ import QuestionsAnswers from "components/QuestionsAnswers";
 import QuestionSteps from "components/QuestionSteps";
 import { useAtom } from "jotai";
 import { questionNoAtom } from "utils/atom";
+import axios from "axios";
+import { answerNoAtom } from "utils/atom";
 const QuestionPage = () => {
   const [questionNo, setQuestionNo] = useAtom(questionNoAtom);
   return (

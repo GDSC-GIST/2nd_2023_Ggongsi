@@ -32,6 +32,7 @@ axios({
   },
   timeout: 2000, //해당 시간보다 지연될 경우 요청 종료
 });
+
 //transformRequest : 서버에 전달되기 전에 요청 데이터를 바꿀 수 있다
 
 //put method는 서버 내부적으로 get -> post 과정을 거침

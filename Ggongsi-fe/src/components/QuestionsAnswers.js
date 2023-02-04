@@ -20,6 +20,39 @@ const QuestionsAnswers = ({ question }) => {
       setQuestionNo((prev) => prev + 1);
     }
   };
+  const sendAnswer = () => {
+    axios({
+      method: "post",
+      url: "/user/${studentID}", //studentID
+      transformRequest: [
+        function (data, headers) {
+          const ans1 = answerNo[0];
+          const ans2 = answerNo[1];
+          const ans3 = answerNo[2];
+          const ans4 = answerNo[3];
+          const ans5 = answerNo[4];
+          const ans6 = answerNo[5];
+          const ans7 = answerNo[6];
+          return data;
+        },
+      ],
+      //headers: { "X-Requested-With": "XMLHttpRequest" },
+      //여기에서 header가 필요한가?
+      data: {
+        name: "",
+        studentID: "",
+        major: "",
+        answer1: ans1,
+        answer2: ans2,
+        answer3: ans3,
+        answer4: ans4,
+        answer5: ans5,
+        answer6: ans6,
+        answer7: ans7,
+      },
+      timeout: 2000, //해당 시간보다 지연될 경우 요청 종료
+    });
+  };
 
   /*   useEffect(() => {
     console.log(answerNo);
@@ -56,6 +89,9 @@ const QuestionsAnswers = ({ question }) => {
           //onclick 함수
           onClick={() => {
             savingAnswer(index);
+            if (answerNo.length == 7) {
+              sendAnswer();
+            }
           }}
           key={`answer-${index}`}
           style={{
