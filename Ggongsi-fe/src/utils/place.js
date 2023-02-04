@@ -53,3 +53,22 @@ export const cafe = {
   image: CafeImage,
   alt: "",
 };
+
+export const getPlace = (n) => {
+  switch (n) {
+    case "00":
+      return "library";
+
+    case "01":
+      return "dormitory";
+
+    case "10":
+      return "seminar";
+
+    case "11":
+      return "cafe";
+
+    default:
+      return "library";
+  }
+};

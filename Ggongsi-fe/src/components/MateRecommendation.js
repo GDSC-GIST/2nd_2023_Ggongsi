@@ -10,7 +10,6 @@ const MateRecommendation = ({ major = "", sid = 0, name = "" }) => {
           color: colorSet.white,
           fontFamily: "Hanna",
           fontSize: "20px",
-          fontWeight: "bold",
         }}
       >
         추천 스터디 메이트
