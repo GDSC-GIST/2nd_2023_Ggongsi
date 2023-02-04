@@ -21,6 +21,7 @@ code {
     monospace;
 }
 
+
 #root {
   width: 100vw;
   height: 100vh;
@@ -42,3 +43,4 @@ code {
   font-family: "BMHANNA";
   src: url("./fonts/BMHANNAPro.ttf");
 }
+
