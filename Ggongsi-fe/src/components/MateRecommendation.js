@@ -8,8 +8,8 @@ const MateRecommendation = ({ major = "", sid = 0, name = "" }) => {
           margin: "0px 0px 30px 0px",
           lineHeight: "20px",
           color: colorSet.white,
+          fontFamily: "Hanna",
           fontSize: "20px",
-          fontWeight: "bold",
         }}
       >
         추천 스터디 메이트
@@ -19,6 +19,7 @@ const MateRecommendation = ({ major = "", sid = 0, name = "" }) => {
           margin: "0px 0px 30px 0px",
           lineHeight: "16px",
           color: colorSet.white,
+          fontFamily: "Hanna",
           fontSize: "16px",
           fontWeight: "normal",
         }}

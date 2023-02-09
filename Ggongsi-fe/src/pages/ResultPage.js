@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import MateRecommendation from "components/MateRecommendation";
 import PlaceRecommendation from "components/PlaceRecommendation";
 import ShareButton from "components/ShareButton";
-import { useEffect } from "react";
+import { getPlace } from "utils/place";
 
 const ResultPage = () => {
+  const [query] = useSearchParams();
+  const [place, setPlace] = useState("");
+
+  useEffect(() => {
+    if (query) {
+      setPlace(getPlace(query.get("n")));
+    }
+  }, [query]);
+
   return (
     <div
       style={{
@@ -14,7 +25,7 @@ const ResultPage = () => {
         textAlign: "center",
       }}
     >
-      <PlaceRecommendation place="library" />
+      <PlaceRecommendation place={place} />
 
       <MateRecommendation major="전기전자컴퓨터공학부" sid={20} name="김여원" />
 
