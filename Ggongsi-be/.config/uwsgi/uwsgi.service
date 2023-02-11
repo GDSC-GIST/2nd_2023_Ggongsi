@@ -3,7 +3,7 @@ Description=uWSGI service
 After=syslog.target
  
 [Service]
-ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/2nd_2023_Ggongsi/Ggongsi-be/.config/uwsgi/mysite.ini
+ExecStart=/home/ubuntu/myvenv/bin/uwsgi --emperor /srv/2nd_2023_Ggongsi/Ggongsi-be/.config/uwsgi/mysite.ini
  
 Restart=always
 KillSignal=SIGQUIT
