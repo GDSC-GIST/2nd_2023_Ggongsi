@@ -6,6 +6,10 @@ import Input from "./Input";
 import ResultPage from "pages/ResultPage";
 
 const App = () => {
+  /*   const url = "http://127.0.0.1:8000";
+  fetch(url)
+    .then((res: Response) => res.json())
+    .then((data) => console.log(data)); */
   return (
     <BrowserRouter>
       <Routes>

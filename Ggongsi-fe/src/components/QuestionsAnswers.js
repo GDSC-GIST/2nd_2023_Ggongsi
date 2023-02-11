@@ -5,11 +5,14 @@ import { useNavigate } from "react-router";
 import { useAtom } from "jotai";
 import { answerNoAtom, questionNoAtom } from "utils/atom";
 import { useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { infoAtom } from "utils/atom";
 const QuestionsAnswers = ({ question }) => {
   const Questions = getQuestions(question);
   const [answerNo, setAnswerNo] = useAtom(answerNoAtom);
   const [questionNo, setQuestionNo] = useAtom(questionNoAtom);
+  const [info, setInfo] = useAtom(infoAtom);
   //const 답변 저장 함수
   const savingAnswer = (index) => {
     if (answerNo.length <= questionNo) {
@@ -20,41 +23,31 @@ const QuestionsAnswers = ({ question }) => {
       setQuestionNo((prev) => prev + 1);
     }
   };
-  const sendAnswer = () => {
+  const sendAnswer = (index) => {
     axios({
       method: "post",
-      //url: `/user/${studentID}`, //studentID
-      url: "/user/studentID",
+      url: `http://ec2-3-35-149-174.ap-northeast-2.compute.amazonaws.com:8000/studymate/user/${info.studentID}`,
       //만약에 url에 변수를 넣고 싶다면 `(backtick,억음부호)를 넣어주고, ${변수}로 표시해야 적용됨
-      transformRequest: [
-        (data) => {
-          const ans1 = answerNo[0];
-          const ans2 = answerNo[1];
-          const ans3 = answerNo[2];
-          const ans4 = answerNo[3];
-          const ans5 = answerNo[4];
-          const ans6 = answerNo[5];
-          const ans7 = answerNo[6];
-          data = {
-            name: "",
-            studentID: "",
-            major: "",
-            answer1: ans1,
-            answer2: ans2,
-            answer3: ans3,
-            answer4: ans4,
-            answer5: ans5,
-            answer6: ans6,
-            answer7: ans7,
-          };
-          return data;
-        },
-      ],
-      //headers: { "X-Requested-With": "XMLHttpRequest" },
-      //여기에서 header가 필요한가?
 
-      timeout: 2000, //해당 시간보다 지연될 경우 요청 종료
-    });
+      data: {
+        name: info.name,
+        studentID: info.studentID,
+        major: info.major,
+        answer1: answerNo[0] + 1,
+        answer2: answerNo[1] + 1,
+        answer3: answerNo[2] + 1,
+        answer4: answerNo[3] + 1,
+        answer5: answerNo[4] + 1,
+        answer6: answerNo[5] + 1,
+        answer7: index + 1,
+      },
+    })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   };
 
   useEffect(() => {
@@ -92,9 +85,9 @@ const QuestionsAnswers = ({ question }) => {
           //onclick 함수
           onClick={() => {
             savingAnswer(index);
-            if (answerNo.length == 7) {
+            if (answerNo.length == 6) {
               console.log("sendAnswer 작동");
-              sendAnswer();
+              sendAnswer(index);
             }
           }}
           key={`answer-${index}`}
@@ -122,3 +115,32 @@ const QuestionsAnswers = ({ question }) => {
 export default QuestionsAnswers;
 //store answer - POST
 //URL / user/{studentID}
+
+/*       transformRequest: [
+        (data) => {
+          const ans1 = answerNo[0];
+          const ans2 = answerNo[1];
+          const ans3 = answerNo[2];
+          const ans4 = answerNo[3];
+          const ans5 = answerNo[4];
+          const ans6 = answerNo[5];
+          const ans7 = answerNo[6];
+          data = {
+            name: "",
+            studentID: "",
+            major: "",
+            answer1: ans1,
+            answer2: ans2,
+            answer3: ans3,
+            answer4: ans4,
+            answer5: ans5,
+            answer6: ans6,
+            answer7: ans7,
+          };
+          return data;
+        },
+      ], */
+//headers: { "X-Requested-With": "XMLHttpRequest" },
+//여기에서 header가 필요한가?
+
+//timeout: 2000, //해당 시간보다 지연될 경우 요청 종료
