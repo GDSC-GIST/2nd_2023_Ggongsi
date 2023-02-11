@@ -159,7 +159,7 @@ def findMate(request, studentID):
 
         #mate = mates[0]
         l = len(mates)
-        rn = random.randint(0, l)
+        rn = random.randint(0, l-1)
         mate = mates[rn]
         stuID = int(mate[0])
         user = UserAnswers.objects.get(studentID=stuID)
