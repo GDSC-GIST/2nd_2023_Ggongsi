@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { colorSet } from "utils/style";
 
 
-
 const Main = ()=> {
     const navigate = useNavigate();
  

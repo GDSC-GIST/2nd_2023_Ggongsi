@@ -5,9 +5,12 @@ import { colorSet } from "utils/style";
 
 
 const Input = ()=> {
+    let cnt = 0;
     const navigate = useNavigate();
     const navigateToQuestion = () => {
-        navigate("/question");
+        if (info.name != "" && info.studentID != "" && info.major != ""){
+            navigate("/question");
+        }
         };
 
     const [info, setInfo] = useAtom(infoAtom);
@@ -65,6 +68,7 @@ const Input = ()=> {
                         paddingBottom: '7px', 
                         marginTop: '20px'}}>
 
+                    <option value="las" disabled selected>선택해주세요</option>
                     <option value="las">기초교육학</option>
                     <option value="eecs">전기전자컴퓨터공학</option>
                     <option value="chem">화학</option>
@@ -84,7 +88,7 @@ const Input = ()=> {
                     fontFamily: "HannaAir",
                     fontWeight: "bold",
                 }}> 학번 : {" "}
-                <input type = "text" 
+                <input id = "number" type = "text" 
                 placeholder="ex.20205001"
                 maxLength={8}
                 value = {info.studentID} 
@@ -101,6 +105,7 @@ const Input = ()=> {
                     marginTop: '15px', }}
                 onChange={(e)=>{
                     savingID(e.target.value);
+                    cnt = cnt+ 1;
                 }}
                 /> </label>
             </div>
@@ -113,7 +118,7 @@ const Input = ()=> {
                     fontWeight: "bold",
                     
                 }}> 이름 : {" "}
-                <input type= "text" value = {info.name} 
+                <input id = "name" type= "text" value = {info.name} 
                 style={{
                     paddingLeft: "15px", 
                     fontWeight: "normal", 
