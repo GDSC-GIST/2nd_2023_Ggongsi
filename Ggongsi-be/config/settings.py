@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     ".ap-northeast-2.compute.amazonaws.com",
-    "3.35.149.174"
+    "3.35.149.174",
+    '*'
 ]
 
 
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     
     'studymateapp',
     'rest_framework',
+
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +56,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000')
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'config.urls'
 
