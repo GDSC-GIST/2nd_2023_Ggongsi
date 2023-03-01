@@ -158,8 +158,9 @@ def findMate(request, studentID):
                 mates.remove(mate)
 
         #mate = mates[0]
+        l = 1
         l = len(mates)
-        rn = random.randint(0, l-1)
+        rn = random.randrange(0, l)
         mate = mates[rn]
         stuID = int(mate[0])
         user = UserAnswers.objects.get(studentID=stuID)
