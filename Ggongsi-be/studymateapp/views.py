@@ -157,11 +157,11 @@ def findMate(request, studentID):
             if mate[1] != top:
                 mates.remove(mate)
 
-        #mate = mates[0]
-        l = 1
-        l = len(mates)
-        rn = random.randrange(0, l)
-        mate = mates[rn]
+        mate = mates[0]
+#         l = 1
+#         l = len(mates)
+#         rn = random.randrange(0, l)
+#         mate = mates[rn]
         stuID = int(mate[0])
         user = UserAnswers.objects.get(studentID=stuID)
         serializer = UserAnswersSerializer(user)
