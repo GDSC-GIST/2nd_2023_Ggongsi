@@ -1,19 +1,43 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useAtom } from "jotai";
+import axios from "axios";
 import MateRecommendation from "components/MateRecommendation";
 import PlaceRecommendation from "components/PlaceRecommendation";
 import ShareButton from "components/ShareButton";
-import { getPlace } from "utils/place";
+import { infoAtom } from "utils/atom";
+import { getPlaceFromQuery, getPlaceObject } from "utils/place";
+import { BASE_URL } from "utils/util";
 
 const ResultPage = () => {
-  const [query] = useSearchParams();
+  const [info] = useAtom(infoAtom);
   const [place, setPlace] = useState("");
+  const [mate, setMate] = useState({});
+  const [query] = useSearchParams();
 
   useEffect(() => {
     if (query) {
-      setPlace(getPlace(query.get("n")));
+      getPlaceFromQuery(query.get("n"));
     }
   }, [query]);
+
+  useEffect(() => {
+    const getPlace = async () => {
+      const response = await axios.get(
+        `${BASE_URL}/studymate/findplace/${info.studentID}`
+      );
+
+      setPlace(response.data.name);
+    };
+    const getMate = async () => {
+      const response = await axios.get(`${BASE_URL}/studymate/findmate/${info.studentID}`);
+
+      setMate(response.data);
+    };
+
+    getPlace();
+    getMate();
+  }, []);
 
   return (
     <div
@@ -27,7 +51,11 @@ const ResultPage = () => {
     >
       <PlaceRecommendation place={place} />
 
-      <MateRecommendation major="전기전자컴퓨터공학부" sid={20} name="김여원" />
+      <MateRecommendation
+        major={mate.major}
+        sid={mate.studentID}
+        name={mate.name}
+      />
 
       <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
         <ShareButton type="kakao" />

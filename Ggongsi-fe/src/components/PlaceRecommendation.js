@@ -1,5 +1,5 @@
 import { getPlaceObject } from "utils/place";
-import { colorSet } from "utils/style";
+import { colorSet } from "utils/util";
 
 const PlaceRecommendation = ({ place }) => {
   const placeObject = getPlaceObject(place);

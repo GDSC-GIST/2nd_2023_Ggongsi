@@ -1,7 +1,7 @@
 import { infoAtom } from "utils/atom";
 import { useAtom } from "jotai";
 import { useNavigate } from 'react-router';
-import { colorSet } from "utils/style";
+import { colorSet } from "utils/util";
 
 
 const Input = ()=> {

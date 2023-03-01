@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { colorSet } from "utils/style";
+import { colorSet } from "utils/util";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Header = () => {
       <button
         onClick={() => {
           navigate("/");
+          window.location.reload();
         }}
         style={{ padding: "0px", border: "none", background: "none" }}
       >

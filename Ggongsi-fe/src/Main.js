@@ -1,6 +1,6 @@
 import main from './images/mainlo2.png';
 import { useNavigate } from 'react-router';
-import { colorSet } from "utils/style";
+import { colorSet } from "utils/util";
 
 
 const Main = ()=> {

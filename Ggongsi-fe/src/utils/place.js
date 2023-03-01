@@ -5,16 +5,16 @@ import CafeImage from "assets/cafe.png";
 
 export const getPlaceObject = (place) => {
   switch (place) {
-    case "library":
+    case "중앙 도서관":
       return library;
 
-    case "dormitory":
+    case "기숙사":
       return dormitory;
 
-    case "seminar":
+    case "세미나실":
       return seminar;
 
-    case "cafe":
+    case "카페":
       return cafe;
 
     default:
@@ -54,21 +54,21 @@ export const cafe = {
   alt: "",
 };
 
-export const getPlace = (n) => {
+export const getPlaceFromQuery = (n) => {
   switch (n) {
     case "00":
-      return "library";
+      return library;
 
     case "01":
-      return "dormitory";
+      return dormitory;
 
     case "10":
-      return "seminar";
+      return seminar;
 
     case "11":
-      return "cafe";
+      return cafe;
 
     default:
-      return "library";
+      return library;
   }
 };
