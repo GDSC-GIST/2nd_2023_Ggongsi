@@ -159,8 +159,8 @@ def findMate(request, studentID):
 
         l = 1
         l = len(mates)
-        rn = random.randrange(0, l)
-        mate = mates[rn]
+        rann = random.randrange(0, l)
+        mate = mates[rann]
         stuID = int(mate[0])
         user = UserAnswers.objects.get(studentID=stuID)
         serializer = UserAnswersSerializer(user)
