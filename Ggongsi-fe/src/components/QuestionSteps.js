@@ -1,4 +1,4 @@
-import { colorSet } from "utils/style";
+import { colorSet } from "utils/util";
 
 const QuestionSteps = ({ stepsFilled }) => {
   return (

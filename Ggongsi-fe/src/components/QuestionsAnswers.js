@@ -1,18 +1,21 @@
 //import { getPlaceObject } from "utils/placE";
 import { getQuestions } from "utils/question";
-import { colorSet } from "utils/style";
-import { useNavigate } from "react-router";
+import { colorSet } from "utils/util";
 import { useAtom } from "jotai";
 import { answerNoAtom, questionNoAtom } from "utils/atom";
-import { useEffect } from "react";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { infoAtom } from "utils/atom";
+import { BASE_URL } from "utils/util";
+import { useNavigate } from "react-router-dom";
+
 const QuestionsAnswers = ({ question }) => {
   const Questions = getQuestions(question);
   const [answerNo, setAnswerNo] = useAtom(answerNoAtom);
   const [questionNo, setQuestionNo] = useAtom(questionNoAtom);
-  const [info, setInfo] = useAtom(infoAtom);
+  const [info] = useAtom(infoAtom);
+  const navigate = useNavigate()
+
   //const 답변 저장 함수
   const savingAnswer = (index) => {
     if (answerNo.length <= questionNo) {
@@ -26,7 +29,7 @@ const QuestionsAnswers = ({ question }) => {
   const sendAnswer = (index) => {
     axios({
       method: "post",
-      url: `http://ec2-3-35-149-174.ap-northeast-2.compute.amazonaws.com:8000/studymate/user/${info.studentID}`,
+      url: `${BASE_URL}/studymate/user/${info.studentID}`,
       //만약에 url에 변수를 넣고 싶다면 `(backtick,억음부호)를 넣어주고, ${변수}로 표시해야 적용됨
 
       data: {
@@ -43,16 +46,14 @@ const QuestionsAnswers = ({ question }) => {
       },
     })
       .then(function (response) {
-        console.log(response.data);
+        navigate("/result");
       })
       .catch((error) => {
         console.error(error.message);
       });
+
   };
 
-  useEffect(() => {
-    console.log(answerNo);
-  }, [answerNo]);
   return (
     <>
       <p
@@ -86,7 +87,6 @@ const QuestionsAnswers = ({ question }) => {
           onClick={() => {
             savingAnswer(index);
             if (answerNo.length == 6) {
-              console.log("sendAnswer 작동");
               sendAnswer(index);
             }
           }}
