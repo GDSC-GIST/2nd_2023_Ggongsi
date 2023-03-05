@@ -17,10 +17,27 @@ def storeAnswer(request, studentID):
         data = request.data
         serializer = UserAnswersSerializer(data=data)
         # return HttpResponse()
-        if serializer.is_valid():
-            serializer.save()
-            calculateResult(studentID)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            obj=UserAnswers.objects.get(studentID=data.studentID)
+            if obj.exists():
+                user = UserAnswers.objects.get(studentID=studentID)
+                user.answer1 = data.answer1
+                user.answer2 = data.answer2
+                user.answer3 = data.answer3
+                user.answer4 = data.answer4
+                user.answer5 = data.answer5
+                user.answer6 = data.answer6
+                user.answer7 = data.answer7
+                user.name = data.name
+                user.major = data.major
+                user.save()
+                calculateResult(studentID)
+
+        except UserAnswers.DoesNotExist:
+            if serializer.is_valid():
+                serializer.save()
+                calculateResult(studentID)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
