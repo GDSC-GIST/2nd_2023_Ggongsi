@@ -9,18 +9,22 @@ from rest_framework import status
 from rest_framework.response import Response
 import random
 
-@api_view(['POST'])
 def storeAnswer(request, studentID):
     print(request)
-    if request.method == 'POST':
-        print(request.data)
+    obj = UserAnswers.objects.get(studentID=request.data.studentID)
+    if obj.exist():
+        putAnswer(request, studentID)
+    else:
+        postAnswer(request, studentID)
+
+@api_view(['PUT'])
+def putAnswer(request, studentID):
+    if request.method == 'PUT':
         data = request.data
         serializer = UserAnswersSerializer(data=data)
-        # return HttpResponse()
         try:
-            obj=UserAnswers.objects.get(studentID=data.studentID)
-            if obj.exists():
-                user = UserAnswers.objects.get(studentID=studentID)
+            user = UserAnswers.objects.get(studentID=data.studentID)
+            if user.exist():
                 user.answer1 = data.answer1
                 user.answer2 = data.answer2
                 user.answer3 = data.answer3
@@ -32,12 +36,22 @@ def storeAnswer(request, studentID):
                 user.major = data.major
                 user.save()
                 calculateResult(studentID)
+        except:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        except UserAnswers.DoesNotExist:
-            if serializer.is_valid():
-                serializer.save()
-                calculateResult(studentID)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+def postAnswer(request, studentID):
+    print(request)
+    if request.method == 'POST':
+        print(request.data)
+        data = request.data
+        serializer = UserAnswersSerializer(data=data)
+        # return HttpResponse()
+        if serializer.is_valid():
+            serializer.save()
+            calculateResult(studentID)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
