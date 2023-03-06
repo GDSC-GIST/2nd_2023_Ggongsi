@@ -13,8 +13,8 @@ import random
 def storeAnswer(request, studentID):
     if request.method == 'PUT':
         data = request.data
-        serializer = UserAnswersSerializer(data=data)
-        user = UserAnswers.objects.get(studentID=data.studentID)
+        user = UserAnswers.objects.get(studentID=data['studentID'])
+        serializer = UserAnswersSerializer(user, data=data)
         if serializer.is_valid():
             serializer.save()
             calculateResult(studentID)
