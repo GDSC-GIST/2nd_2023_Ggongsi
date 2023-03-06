@@ -9,51 +9,26 @@ from rest_framework import status
 from rest_framework.response import Response
 import random
 
+@api_view(['POST', 'PUT'])
 def storeAnswer(request, studentID):
-    print(request)
-    obj = UserAnswers.objects.get(studentID=request.data.studentID)
-    if obj.exist():
-        putAnswer(request, studentID)
-    else:
-        postAnswer(request, studentID)
-
-@api_view(['PUT'])
-def putAnswer(request, studentID):
     if request.method == 'PUT':
         data = request.data
         serializer = UserAnswersSerializer(data=data)
-        try:
-            user = UserAnswers.objects.get(studentID=data.studentID)
-            if user.exist():
-                user.answer1 = data.answer1
-                user.answer2 = data.answer2
-                user.answer3 = data.answer3
-                user.answer4 = data.answer4
-                user.answer5 = data.answer5
-                user.answer6 = data.answer6
-                user.answer7 = data.answer7
-                user.name = data.name
-                user.major = data.major
-                user.save()
-                calculateResult(studentID)
-        except:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['POST'])
-def postAnswer(request, studentID):
-    print(request)
+        user = UserAnswers.objects.get(studentID=data.studentID)
+        if serializer.is_valid():
+            serializer.save()
+            calculateResult(studentID)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     if request.method == 'POST':
         print(request.data)
         data = request.data
         serializer = UserAnswersSerializer(data=data)
-        # return HttpResponse()
         if serializer.is_valid():
             serializer.save()
             calculateResult(studentID)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 def calculateResult(studentID):
     user = UserAnswers.objects.get(studentID=studentID)
