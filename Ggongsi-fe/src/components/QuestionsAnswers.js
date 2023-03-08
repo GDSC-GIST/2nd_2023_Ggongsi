@@ -14,8 +14,9 @@ const QuestionsAnswers = ({ question }) => {
   const [answerNo, setAnswerNo] = useAtom(answerNoAtom);
   const [questionNo, setQuestionNo] = useAtom(questionNoAtom);
   const [info] = useAtom(infoAtom);
+  
+  
   const navigate = useNavigate()
-
   //const 답변 저장 함수
   const savingAnswer = (index) => {
     if (answerNo.length <= questionNo) {
@@ -26,9 +27,18 @@ const QuestionsAnswers = ({ question }) => {
       setQuestionNo((prev) => prev + 1);
     }
   };
-  const sendAnswer = (index) => {
+  const getcheckAnwser = async() => {
+
+    const response = await axios.get(
+      `${BASE_URL}/studymate/test/${info.studentID}`
+    );
+return(response);
+  };
+
+
+  const sendAnswer = (method,index) => {
     axios({
-      method: "post",
+      method: method,
       url: `${BASE_URL}/studymate/user/${info.studentID}`,
       //만약에 url에 변수를 넣고 싶다면 `(backtick,억음부호)를 넣어주고, ${변수}로 표시해야 적용됨
 
@@ -86,9 +96,16 @@ const QuestionsAnswers = ({ question }) => {
           //onclick 함수
           onClick={() => {
             savingAnswer(index);
-            if (answerNo.length == 6) {
-              sendAnswer(index);
-            }
+            if (answerNo.length==6){
+            getcheckAnwser().then((result)=>{
+              result.data === "True"? sendAnswer("PUT",index) : sendAnswer("POST",index);
+              console.log(result);
+            })
+          }
+            // savingAnswer(index);
+            // if (answerNo.length == 6) {
+            //   sendAnswer(index);
+            // }
           }}
           key={`answer-${index}`}
           style={{
