@@ -6,4 +6,5 @@ urlpatterns = [
     path('findplace/<int:studentID>', views.findPlace),
     path('findmate/<int:studentID>', views.findMate),
     #path('snippets/<int:pk>/', views.snippet_detail),
+    path('test/<int:studentID>', views.isIDexist)
 ]

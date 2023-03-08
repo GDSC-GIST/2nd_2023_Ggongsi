@@ -12,10 +12,10 @@ import random
 @api_view(['GET'])
 def isIDexist(request, studentID):
     if request.method == 'GET':
-        user = UserAnswers.objects.get(studentID=studentID)
-        if user.exists():
-            return True
-        return False
+        ex = UserAnswers.objects.filter(studentID=studentID).exists
+        if ex:
+            return Response("True")
+        return Response("False")
 
 
 @api_view(['POST', 'PUT'])

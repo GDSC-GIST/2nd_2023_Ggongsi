@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     ".ap-northeast-2.compute.amazonaws.com",
-    ".ggongsi.site"
+    ".ggongsi.site",
+    "127.0.0.1"
 ]
 
 
