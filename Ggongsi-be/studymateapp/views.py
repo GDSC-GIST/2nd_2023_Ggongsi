@@ -9,6 +9,15 @@ from rest_framework import status
 from rest_framework.response import Response
 import random
 
+@api_view(['GET'])
+def isIDexist(request, studentID):
+    if request.method == 'GET':
+        user = UserAnswers.objects.get(studentID=studentID)
+        if user.exists():
+            return True
+        return False
+
+
 @api_view(['POST', 'PUT'])
 def storeAnswer(request, studentID):
     if request.method == 'PUT':
