@@ -1,7 +1,8 @@
+import { encodePlace } from "utils/place";
 import KakaoImage from "assets/kakaotalk_share.png";
 import ShareImage from "assets/share.png";
 
-const ShareButton = ({ type = "" }) => {
+const ShareButton = ({ type = "", place = "" }) => {
   const onClick = () => {
     switch (type) {
       case "kakao":
@@ -10,15 +11,22 @@ const ShareButton = ({ type = "" }) => {
         }
 
         window.Kakao.Share.sendDefault({
-          objectType: "text",
-          text: "지공시링크",
-          link: { webUrl: "http://localhost:3000" },
+          objectType: "feed",
+          content: {
+            title: "지공시",
+            imageUrl: "",
+            link: {
+              webUrl: `http://ggongsi.site/result?n=${encodePlace(place)}`,
+            },
+          },
         });
 
         break;
 
       default:
-        navigator.clipboard.writeText("지공시 링크가 들어갈 예정!");
+        navigator.clipboard.writeText(
+          `http://ggongsi.site/result?n=${encodePlace(place)}`
+        );
         break;
     }
   };

@@ -6,7 +6,7 @@ import MateRecommendation from "components/MateRecommendation";
 import PlaceRecommendation from "components/PlaceRecommendation";
 import ShareButton from "components/ShareButton";
 import { infoAtom } from "utils/atom";
-import { getPlaceFromQuery, getPlaceObject } from "utils/place";
+import { getPlaceFromQuery } from "utils/place";
 import { BASE_URL } from "utils/util";
 
 const ResultPage = () => {
@@ -17,7 +17,7 @@ const ResultPage = () => {
 
   useEffect(() => {
     if (query) {
-      getPlaceFromQuery(query.get("n"));
+      setPlace(getPlaceFromQuery(query.get("n")).name);
     }
   }, [query]);
 
@@ -30,7 +30,9 @@ const ResultPage = () => {
       setPlace(response.data.name);
     };
     const getMate = async () => {
-      const response = await axios.get(`${BASE_URL}/studymate/findmate/${info.studentID}`);
+      const response = await axios.get(
+        `${BASE_URL}/studymate/findmate/${info.studentID}`
+      );
 
       setMate(response.data);
     };
@@ -51,16 +53,20 @@ const ResultPage = () => {
     >
       <PlaceRecommendation place={place} />
 
-      <MateRecommendation
-        major={mate.major}
-        sid={mate.studentID}
-        name={mate.name}
-      />
+      {query.get("n") ? null : (
+        <>
+          <MateRecommendation
+            major={mate.major}
+            sid={mate.studentID}
+            name={mate.name}
+          />
 
-      <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
-        <ShareButton type="kakao" />
-        <ShareButton />
-      </div>
+          <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
+            <ShareButton type="kakao" />
+            <ShareButton />
+          </div>
+        </>
+      )}
     </div>
   );
 };

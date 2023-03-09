@@ -72,3 +72,22 @@ export const getPlaceFromQuery = (n) => {
       return library;
   }
 };
+
+export const encodePlace = (place) => {
+  switch (place) {
+    case "library":
+      return "00";
+
+    case "dormitory":
+      return "01";
+
+    case "seminar":
+      return "10";
+
+    case "cafe":
+      return "11";
+
+    default:
+      return "00";
+  }
+};
