@@ -37,9 +37,11 @@ const ResultPage = () => {
       setMate(response.data);
     };
 
-    getPlace();
-    getMate();
-  }, []);
+    if (!query.get("n")) {
+      getPlace();    
+      getMate();
+    }
+  }, [query]);
 
   return (
     <div
@@ -53,20 +55,22 @@ const ResultPage = () => {
     >
       <PlaceRecommendation place={place} />
 
-      {query.get("n") ? null : (
+      {mate.name ? (
         <>
           <MateRecommendation
             major={mate.major}
             sid={mate.studentID}
             name={mate.name}
-          />
+          />    
 
           <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
             <ShareButton type="kakao" />
             <ShareButton />
           </div>
         </>
-      )}
+      ) : null}
+
+      
     </div>
   );
 };

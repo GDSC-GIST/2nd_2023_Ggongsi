@@ -25,11 +25,10 @@ const App = () => {
 
           <Route path="/input" element={<Input />} />
           {studentID ? (
-            <>
               <Route path="/question" element={<QuestionPage />} />
-              <Route path="/result" element={<ResultPage />} />
-            </>
           ) : null}
+              <Route path="/result" element={<ResultPage />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
