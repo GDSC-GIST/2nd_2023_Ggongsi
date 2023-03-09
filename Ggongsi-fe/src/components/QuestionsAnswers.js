@@ -99,7 +99,6 @@ return(response);
             if (answerNo.length==6){
             getcheckAnwser().then((result)=>{
               result.data === "True"? sendAnswer("PUT",index) : sendAnswer("POST",index);
-              console.log(result);
             })
           }
             // savingAnswer(index);
