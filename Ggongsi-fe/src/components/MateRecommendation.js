@@ -24,7 +24,7 @@ const MateRecommendation = ({ major = "", sid = 0, name = "" }) => {
           fontWeight: "normal",
         }}
       >
-        {`${major}\n${sid.toString().slice(0,2).padStart(2, 0)}학번 ${name}`}
+        {`${major} ${sid.toString().slice(2, 4).padStart(2, 0)}학번 ${name}`}
       </p>
     </>
   );
