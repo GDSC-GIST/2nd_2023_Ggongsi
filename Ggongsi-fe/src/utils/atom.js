@@ -7,5 +7,5 @@ export const answerNoAtom = atom([]);
 export const infoAtom = atom({
   name: "",
   studentID: "",
-  major: "las",
+  major: "",
 });
