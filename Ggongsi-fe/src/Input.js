@@ -82,7 +82,7 @@ const Input = () => {
             <option value="화학과">화학과</option>
             <option value="물리광과학과">물리광과학과</option>
             <option value="생명과학부">생명과학부</option>
-            <option value="지구환경공학부">지구환경공학</option>
+            <option value="지구환경공학부">지구환경공학부</option>
             <option value="기계공학부">기계공학부</option>
             <option value="신소재공학부">신소재공학부</option>
           </select>

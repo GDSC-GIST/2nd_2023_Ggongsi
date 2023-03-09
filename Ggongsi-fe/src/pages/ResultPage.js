@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import axios from "axios";
 import MateRecommendation from "components/MateRecommendation";
@@ -14,12 +14,15 @@ const ResultPage = () => {
   const [place, setPlace] = useState("");
   const [mate, setMate] = useState({});
   const [query] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (query) {
+      if (query.get("n")) {
       setPlace(getPlaceFromQuery(query.get("n")).name);
+    } else if (!info.studentID) {
+      navigate("/");
     }
-  }, [query]);
+  }, [query, info]);
 
   useEffect(() => {
     const getPlace = async () => {
