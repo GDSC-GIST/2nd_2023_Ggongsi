@@ -41,7 +41,7 @@ export const dormitory = {
 export const seminar = {
   name: "세미나실",
   description:
-    "역시 공부는 혼자서보다는 여럿이서! 당신은 친구들이랑 세미나실에서 공부하는게 좋겠어요. 하만 유혹도 두 배 다른 길로 새지 않도록 조심해야겠어요 0_0 ",
+    "역시 공부는 혼자서보다는 여럿이서! 당신은 친구들이랑 세미나실에서 공부하는게 좋겠어요. 하지만 유혹도 두 배! 다른 길로 새지 않도록 조심해야겠어요 0_0 ",
   image: SeminarImage,
   alt: "",
 };
@@ -75,16 +75,16 @@ export const getPlaceFromQuery = (n) => {
 
 export const encodePlace = (place) => {
   switch (place) {
-    case "library":
+    case "도서관":
       return "00";
 
-    case "dormitory":
+    case "기숙사":
       return "01";
 
-    case "seminar":
+    case "세미나실":
       return "10";
 
-    case "cafe":
+    case "카페":
       return "11";
 
     default:

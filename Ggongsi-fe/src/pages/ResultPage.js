@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import axios from "axios";
 import MateRecommendation from "components/MateRecommendation";
+import KakaoShareButton from "components/KakaoShareButton";
 import PlaceRecommendation from "components/PlaceRecommendation";
 import ShareButton from "components/ShareButton";
 import { infoAtom } from "utils/atom";
@@ -17,7 +18,7 @@ const ResultPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      if (query.get("n")) {
+    if (query.get("n")) {
       setPlace(getPlaceFromQuery(query.get("n")).name);
     } else if (!info.studentID) {
       navigate("/");
@@ -32,6 +33,7 @@ const ResultPage = () => {
 
       setPlace(response.data.name);
     };
+
     const getMate = async () => {
       const response = await axios.get(
         `${BASE_URL}/studymate/findmate/${info.studentID}`
@@ -40,11 +42,11 @@ const ResultPage = () => {
       setMate(response.data);
     };
 
-    if (!query.get("n")) {
-      getPlace();    
+    if (!query.get("n") && info.studentID) {
+      getPlace();
       getMate();
     }
-  }, [query]);
+  }, [query, info]);
 
   return (
     <div
@@ -64,16 +66,14 @@ const ResultPage = () => {
             major={mate.major}
             sid={mate.studentID}
             name={mate.name}
-          />    
+          />
 
           <div style={{ display: "flex", gap: "15px", marginTop: "50px" }}>
-            <ShareButton type="kakao" />
-            <ShareButton />
+            <KakaoShareButton place={place} />
+            <ShareButton place={place} />
           </div>
         </>
       ) : null}
-
-      
     </div>
   );
 };

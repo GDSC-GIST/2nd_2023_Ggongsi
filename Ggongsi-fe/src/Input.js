@@ -26,7 +26,6 @@ const Input = () => {
 
   return (
     <div
-      classname="input"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -60,6 +59,7 @@ const Input = () => {
           전공 :{" "}
           <select
             name="choice"
+            defaultValue=""
             onChange={(e) => {
               savingMajor(e.target.value);
             }}
@@ -74,7 +74,7 @@ const Input = () => {
               marginTop: "20px",
             }}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               선택해주세요
             </option>
             <option value="기초교육학부">기초교육학부</option>
